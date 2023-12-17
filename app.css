@@ -1,0 +1,165 @@
+
+font
+{
+  font-size: 30px;
+  font-weight: bold;
+  color: blue;
+}
+
+.font
+{
+  font-size: 30px;
+  font-weight: bold;
+  color: cornflowerblue;
+}
+
+.mdc-top-app-bar{
+  margin: 0;
+  background: rosybrown;
+}
+
+.change-color-to-gray{
+  color: steelBlue;
+}
+
+.mdc-button{
+  color: royalblue;
+  --mdc-theme-primary: royalblue;
+  --mdc-theme-on-primary: #442C2E;
+}
+
+.page-footer{
+  background:dimgray;
+  color: dimgray;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  clear: both;
+  width: 100%;
+}
+
+
+
+.margin5{
+  margin: 5px;
+}
+
+.mdc-button__ripple{
+  --mdc-theme-primary: royalblue;
+}
+
+.mdc-button--raised:not(:disabled), .mdc-button--unelevated:not(:disabled) {
+  background-color: royalblue;
+}
+
+.inline{
+  display: inline;
+}
+
+.white-texts{
+  color: white;
+}
+
+input[type=submit] {
+  color: white;
+  outline: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.tbody2 {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  overflow-y: auto;    / Trigger vertical scroll    /
+  overflow-x: hidden;  / Hide the horizontal scroll /
+}
+.thead2, .tbody2 tr {
+  display: table;
+  width: 100%;
+  height: auto;
+  table-layout: fixed;/* even columns width , fix width of table too*/
+}
+.thead2 {
+  width: calc( 100% - 1em );/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+.table2 {
+  width: 80%;
+  height:40%;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+html,body,center{
+  height:100%;
+  width: 100%
+}
+
+body {
+  margin:0;
+  padding:0;
+}
+
+.rating {
+  font-size: 0;
+  display: table;
+}
+
+.rating > label {
+  color: #ddd;
+  float: right;
+}
+
+.rating > label:before {
+  padding: 5px;
+  font-size: 24px;
+  line-height: 1em;
+  display: inline-block;
+  content: "★";
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #FFD700;
+}
+
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+  opacity: 0.5;
+}
+
+.rating2 {
+  font-size: 0;
+  display: table;
+}
+
+.rating2 > label {
+  color: #ddd;
+  float: right;
+}
+
+.rating2 > label:before {
+  padding: 5px;
+  font-size: 24px;
+  line-height: 1em;
+  display: inline-block;
+  content: "★";
+}
+
+.rating2 > input:checked ~ label {
+  color: #FFD700;
+}
+
+footer {
+  z-index: 10;
+}

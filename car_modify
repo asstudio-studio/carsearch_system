@@ -1,0 +1,120 @@
+<?php
+header("Content-Type: text/html; charset=utf-8");
+    include('header.php');
+    include_once "carsearch_db_conn.php";
+    session_start();
+
+	$old_CarID = $_GET['CarID'];
+
+    $query = "select * from car where CarID = ?";
+    $stmt = $db->prepare($query);
+    $stmt->execute(array($old_CarID));
+    $result = $stmt->fetchAll();
+	
+	
+	if ($_SERVER["REQUEST_METHOD"] == "POST"){
+	
+		//error_reporting(E_ERROR | E_PARSE);
+		
+		if (array_key_exists('send', $_POST)) {
+			if('s'== $_SESSION["user_level"]){
+				$CarID = $_POST['CarID'];
+				$AreaCode = $_POST['AreaCode'];
+				$Brand = $_POST['Brand'];
+				$Name = $_POST['Name'];
+				$Displacement= $_POST['Displacement'];
+				$Price = $_POST['Price'];
+				
+				$query_update = "update car set 
+					CarID=? ,AreaCode=?,
+					Brand=?,Name=?,Displacement=?,Price=?
+					where CarID = ? ";
+				$stmt_update = $db->prepare($query_update);
+				$stmt_update->execute(array($CarID,$AreaCode,
+				$Brand,$Name,$Displacement,$Price));
+				
+				echo sprintf('<script>alert("更改成功");</script>');
+				echo sprintf('<script type="text/JavaScript"> location.href="car.php"; </script>');
+			}
+			else{
+				echo sprintf('<script>alert("請先登入為管理者");</script>');
+				echo sprintf('<script type="text/JavaScript"> location.href="car.php"; </script>');
+			}
+		}	
+
+	}
+?>
+
+<header class="mdc-top-app-bar">
+    <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+<?php
+		echo sprintf('<button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+			onclick=location.href="manufacturer.php";>arrow_back
+            </button>');
+
+?>
+            <span class="mdc-top-app-bar__title">修改廠商資訊</span>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+        </section>
+    </div>
+</header>
+
+<center>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    
+
+    <div class="row">
+        <h3 class="inline brown-text"> 修改廠商資訊</h3>
+    </div>
+
+    <br/>
+    <br/>
+	<form method="post">
+        <table border='1' style='width:70%'>
+            <thead>
+                <tr>
+                <th>車輛編號</th>
+                <th>車輛品牌</th>
+                <th>販賣商店</th>
+                <th>車輛名稱</th>
+                <th>排氣量</th>
+                <th>價錢</th>
+				<th>修改</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    for ($i = 0; $i < count($result); $i++) {
+                        echo "<tr>";
+                        //echo sprintf('<td><input class="materialize-textarea" type="text" name="CarID" value="%s"/></td>', $result[$i]['CarID']);
+						echo "<td>" . $result[$i]['CarID'] . "</td>";
+                        echo sprintf('<td><input class="materialize-textarea" type="text" name="Brand" value="%s"/></td>', $result[$i]['Brand']);
+                        echo sprintf('<td><input class="materialize-textarea" type="text" name="AreaCode" value="%s"/></td>', $result[$i]['AreaCode']);
+                        echo sprintf('<td><input class="materialize-textarea" type="text" name="Name" value="%s"/></td>', $result[$i]['Name']);
+                        echo sprintf('<td><input class="materialize-textarea" type="text" name="Displacement" value="%s"/></td>', $result[$i]['Displacement']);
+                        echo sprintf('<td><input class="materialize-textarea" type="text" name="Price" value="%s"/></td>', $result[$i]['Price']);
+						echo '<td><button class="btn-floating btn-large waves-effect waves-light green" type="submit" name="send">
+                            <i class="material-icons">check</i>
+                            </button></td>';
+                        echo "</tr>";
+                    }
+                ?>
+				
+
+            </tbody>
+        </table>
+	</form>
+</center>
+
+<?php
+include('footer.php');
+?>
+
+
